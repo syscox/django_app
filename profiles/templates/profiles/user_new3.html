@@ -1,0 +1,125 @@
+{% extends 'profiles/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>New User</title>
+{% endblock %}
+
+{% block content %}
+
+    {% for hidden_field in user_form.hidden_fields %}
+        {{ hidden_field }}
+    {% endfor %}
+
+<div class="container">
+
+<div class="card border-primary mb-3" style="max-width: 40rem;">
+<div class="card-body">
+
+            {% if messages %}
+            <br>
+            <ul class="messages">
+                {% for msg in messages %}
+                <li>
+                    {% if msg.level > 25 %}
+                    <div class="alert alert-danger" role="alert">
+                        {{msg.message}}
+                    </div>
+                    {%else%}
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                    {{msg.message}}
+                    </div>
+                    {% endif%}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+    {{ user_form | as_crispy_errors}}
+    <h3 class="card-title">Datos Personales</h3>
+
+      {%if user_form %}
+
+      <!--{{ user_form.non_field_errors }}-->
+      <!--{{ address_form.non_field_errors }}-->
+
+        <form method="POST" action=""> {% csrf_token %}
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-0">
+                {{ user_form.last_name | as_crispy_field }}
+              </div>
+
+              <div class="form-group col-md-6 mb-0">
+                  {{ user_form.first_name | as_crispy_field }}
+              </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    {{ user_form.gender | as_crispy_field }}
+                </div>
+
+                <div class="form-group col-md-6 mb-0">
+                    {{ user_form.phone | as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    {{ user_form.email | as_crispy_field }}
+                    {{ user_form.email | as_crispy_errors }}
+                </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-0">
+                {{ address_form.country  | as_crispy_errors }}
+                {{ address_form.country  | as_crispy_field }}
+
+              </div>
+
+
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-0">
+                  {{ address_form.state | as_crispy_errors }}
+                  {{ address_form.state | as_crispy_field }}
+               </div>
+
+              <div class="form-group col-md-4 mb-0">
+                {{ address_form.city  | as_crispy_errors }}
+                {{ address_form.city  | as_crispy_field }}
+
+              </div>
+
+              <div class="form-group col-md-3 mb-0">
+                  {{ address_form.zip_code | as_crispy_errors }}
+                  {{ address_form.zip_code | as_crispy_field }}
+
+              </div>
+            </div>
+
+            {{ address_form.address | as_crispy_field }}
+
+
+            {{ user_form.active | as_crispy_field }}
+            <h3>Redes Sociales</h3>
+
+
+            {{ media_form | crispy }}
+
+        <div align="right" class="conteiner">
+            <button type="reset" class="btn btn-primary">Borrar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+        </form>
+
+    {%endif %}
+
+  </div>
+<div class="card-footer text-muted">* Campos Obligatorios</div>
+</div>
+</div>
+
+{% endblock %}

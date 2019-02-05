@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>All User</title>
+</head>
+<body>
+    <h1>Pantalla principal de todos los User =D </h1>
+
+    <h3>Estoy usando Template View</h3>
+
+<table style="width:80%">
+  <tr>
+    <th>Full Name</th>
+    <th>Email</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Country</th>
+  </tr>
+    {% for unUser in todos %}
+        <tr>
+	        <td>{{unUser}}</td>
+            <td>{{unUser.email}}</td>
+            <td>{{unUser.address.address}}</td>
+            <td>{{unUser.address.city}}</td>
+            <td>{{unUser.address.state}}</td>
+            <td>{{unUser.address.country}}</td>
+	    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

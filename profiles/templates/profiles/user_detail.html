@@ -1,0 +1,62 @@
+{% extends 'profiles/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Detail</title>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-6">
+
+<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+  <div class="card-header">Detalle de User</div>
+  <div class="card-body">
+    <h5 class="card-title">{{ object.last_name}}, {{object.first_name}}</h5>
+    <ul>
+      <li>ID: {{object.id}}</li>
+      <li>Email: {{ object.email }}</li>
+      <li>Phone: {{ object.phone }}</li>
+      <li>Country: {{ object.address.country }}</li>
+      <li>State: {{ object.address.get_state_display }}</li>
+      <li>City: {{ object.address.city }}</li>
+      <li>Address: {{ object.address.address }}</li>
+      <li>Fecha Creacion: {{ object.fecha_alta }}</li>
+      <li>Active: {{ object.active }}</li>
+
+    </ul>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-sm-6">
+
+
+
+  <div class="card text-white bg-dark mb-3" style="max-width: 60rem;">
+    <div class="card-header">Redes Sociales</div>
+      <div class="card-body">
+
+        {% if media_list%}
+        <ul>
+
+          {%for social in media_list%}
+            <li>{{social.name}}: <a href="{{ el.url }}">{{ social.url }}</a></li>
+
+          <br>
+          {%endfor%}
+
+        </ul>
+        {%else%}
+        <ul>
+          <li>Ninguna</li>
+        </ul>
+        {%endif%}
+  </div>
+  </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
