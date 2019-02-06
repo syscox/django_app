@@ -1,4 +1,4 @@
-Django==1.11.16
+Django==1.11.18
 django-crispy-forms==1.7.2
 django-reverse-admin==2.3.0
 djangorestframework==3.9.0
